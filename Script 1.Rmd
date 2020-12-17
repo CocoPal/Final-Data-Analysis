@@ -1,0 +1,28 @@
+---
+title: "Natural disasters and people displacements in South East Asia"
+author: "IHolovko"
+date: "17 12 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(tidyverse)
+```
+
+
+```{r cars}
+idp_dt <- read.table("IDP_data.csv", sep = ";", header = TRUE)
+
+# We have three countries for which we don't have data at all or not enough data for the analysis: Brunei, Singapore and Timor-Leste. So we take them out. 
+
+idp_clean <- idp_dt[-c(7,10,11),]
+```
+
+
+```{echo=FALSE}
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
