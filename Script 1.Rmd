@@ -61,7 +61,7 @@ country_idp_long_t <- as.tibble(country_idp_long) %>%
 
 country_idp_long_t
 
-country_idp_bar <- ggplot(country_idp_long, aes(x = Year, y = IDPs)) +
+country_idp_bar <- ggplot(country_idp_long_t, aes(x = Year, y = IDPs)) +
   geom_bar(stat = "identity") +
   labs(x = "Year", y = "The number of displacements") +
   facet_wrap(~Country.Name, ncol = 2) +
