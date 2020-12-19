@@ -92,5 +92,28 @@ country_bar2 <- ggplot(country, aes(x = Year, y = N, fill = Disaster_Subgroup)) 
   theme(axis.text.x=element_text(angle=90, hjust=1))
 country_bar2
 
+country <- data %>% 
+  filter(Disaster_Subgroup %in% c("Climatological", "Meteorological", "Hydrological", "Geophysical")) %>%
+  group_by(Year, Disaster_Subgroup, Country) %>%
+  summarise(N=n(), na.rm = TRUE)
+
+
+
+#Preparing data for merging 
+
+#1. Grouping data by year and country
+country_events <- country %>%
+  group_by(Year, Country) %>%
+  summarise(N=n(), na.rm = TRUE)
+
+#2. Transforming to data.frame and replacing values to match those on the dataset on IDPs (replace() didn't work for me, returning some error which I couldn't manage to fix)
+
+country_events <- country_events %>% 
+  as.data.frame() 
+  
+  country_events[country_events == "Philippines (the)"] <- "Philippines"
+  country_events[country_events == "Lao People's Democratic Republic (the)"] <- "Lao PDR"
+  country_events[country_events == "Viet Nam"] <- "Vietnam"
+  
 
 ```
