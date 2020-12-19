@@ -1,0 +1,96 @@
+---
+title: "Natural disasters and people displacements in South East Asia"
+author: "Bokyung"
+date: "18 12 2020"
+output: html_document
+---
+
+```{r, message = FALSE, warning = FALSE}
+# install.packages("tidyverse")
+library(tidyverse)
+#install.packages("reshape")
+library(readxl)
+library(reshape)
+#install.packages("writexl")
+library(writexl)
+```
+
+## Data Preprocessing 
+
+```{r}
+# download
+natural_disaster_2011_2020 <- read_excel("natural_disaster_2011_2020.xlsx")
+
+# delete unnecessary rows
+natural_disaster_2011_2020 <- natural_disaster_2011_2020[-1:-5, ]
+
+# rename the variables 
+names(natural_disaster_2011_2020) <- c('Dis_No', 'Year', 'Seq', 'Disaster_Group', 'Disaster_Subgroup', 'Disaster_Type', 'Disaster_Subtype', 'Disaster_Subsubtype', 'Event_Name', 'Entry_Criteria', 'Country', 'ISO', 'Region', 'Continent', 'Location', 'Origin', 'Associated_Dis', 'Associated_Dis2', 'OFDA_Response', 'Appeal', 'Declaration', 'Aid_Contribution', 'Dis_Mag_Value', 'Dis_Mag_Scale', 'Latitude', 'Longitude', 'Local_Time', 'River_Basin', 'Start_Year', 'Start_Month', 'Start_Day', 'End_Year', 'End_Month', 'End_Day', 'Total_Deaths', 'No_injured', 'No_affected', 'No_Homeless', 'Total_Affected', 'Reconstruction_Costs', 'Insured_Damages', 'Total_Damage', 'CPI')
+
+# delete unnecessary rows
+natural_disaster_2011_2020 <- natural_disaster_2011_2020[-1, ]
+
+# select necessary variables(columns)
+data <- select(natural_disaster_2011_2020, 'Dis_No', 'Year', 'Seq', 'Disaster_Type', 'Disaster_Subgroup', 'Country', 'Dis_Mag_Value', 'Dis_Mag_Scale', 'Latitude', 'Longitude', 'Start_Year', 'Start_Month', 'Start_Day', 'End_Year', 'End_Month', 'End_Day', 'Total_Deaths', 'No_injured', 'No_affected', 'No_Homeless', 'Total_Affected', 'Total_Damage')
+
+# select countries
+## Cambodia, Indonesia, Philippines (the),  Malaysia, Thailand, Lao People's Democratic Republic (the),  Myanmar,  Singapore,  Vietnam.
+data <- data %>%
+  filter(Country %in% c("Cambodia", "Indonesia", "Philippines (the)",  "Malaysia", "Thailand", "Lao People's Democratic Republic (the)",  "Myanmar",  "Singapore",  "Viet Nam"))
+
+```
+
+## Plots - ALL(Climatological, Meteorogical, Hydrological, Geophysical)
+
+```{r}
+# Change in the number of all disasters (group by year)
+all <- data %>% 
+  filter(Disaster_Subgroup %in% c("Climatological", "Meteorological", "Hydrological", "Geophysical")) %>%
+  group_by(Year, Disaster_Subgroup) %>%
+  summarise(N=n(), na.rm = TRUE)
+
+# 1) stacked bar graph 
+all_bar <- ggplot(all, aes(x = Year, y = N, fill = Disaster_Subgroup)) + 
+  geom_bar(stat="identity") +
+  theme_bw() +
+  labs(x="Year", y="The number of event") + 
+  geom_text(aes(label= N), position = position_stack(vjust=0.5)) 
+all_bar
+
+# 2) separated bar graph
+all_bar2 <- ggplot(all, aes(x = Year, y = N, fill = Disaster_Subgroup)) +
+  geom_bar(stat="identity", position="dodge")+
+  theme_bw() + 
+  facet_wrap(~Disaster_Subgroup, ncol=2) +
+  labs(x="Year", y="The number of event") + 
+  geom_text(aes(label= N), size = 2.5) +
+  theme(axis.text.x=element_text(angle=90, hjust=1))
+all_bar2
+
+
+# Change in the number of disaster (group by country)
+country <- data %>% 
+  filter(Disaster_Subgroup %in% c("Climatological", "Meteorological", "Hydrological", "Geophysical")) %>%
+  group_by(Year, Disaster_Subgroup, Country) %>%
+  summarise(N=n(), na.rm = TRUE)
+
+# 1) stacked bar graph
+country_bar <- ggplot(country, aes(x = Year, y = N, fill = Disaster_Subgroup)) + 
+  geom_bar(stat="identity") +
+  labs(x="Year", y="The number of event") + 
+  facet_wrap(~Country, ncol=2) +  
+  theme_bw() +
+  theme(axis.text.x=element_text(angle=90, hjust=1)) 
+country_bar
+
+# 2) separated bar graph
+country_bar2 <- ggplot(country, aes(x = Year, y = N, fill = Disaster_Subgroup)) +
+  geom_bar(stat="identity", position="dodge")+
+  labs(x="Year", y="The number of event") + 
+  facet_wrap(~Country, ncol=2) +  
+  theme_bw() +
+  theme(axis.text.x=element_text(angle=90, hjust=1))
+country_bar2
+
+
+```
