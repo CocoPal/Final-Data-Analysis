@@ -9,15 +9,74 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 library(dplyr)
 library(tidyverse)
+library(ggplot2)
+library(reshape2)
 ```
 
 
-```{r cars}
-idp_dt <- read.table("IDP_data.csv", sep = ";", header = TRUE)
+```{r cars, warning = FALSE}
+idp_dt <- read.table("IDP_data.csv", sep = ";", header = TRUE, stringsAsFactors = FALSE)
 
 # We have three countries for which we don't have data at all or not enough data for the analysis: Brunei, Singapore and Timor-Leste. So we take them out. 
 
 idp_clean <- idp_dt[-c(7,10,11),]
+
+idp_clean_t <- as.tibble(idp_clean)
+
+#Preparing data for South Asia graph (practice)
+
+#1. Selecting needed row and dropping unnecessary column;
+SE_idp <- idp_clean_t %>%
+  filter(Country.Name == c("South Asia")) %>%
+  select(-2)
+  
+#2. Reshaping data from wide to long format; 
+
+SE_idp_long <- melt(data = SE_idp, 
+                    id.vars = "Country.Name",
+                    variable.name = "Year",
+                    value.name = "IDPs")
+
+SE_idp_bar <- ggplot(SE_idp_long, aes(x = Year, y = IDPs)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(x= "Year", y = " The number of displacements")
+SE_idp_bar
+
+# Preparing data for individual countries 
+
+country_idp <- idp_clean_t %>%
+  filter(Country.Name %in% c("Cambodia", "Indonesia", "Philippines", "Malaysia", "Thailand", "Lao PDR", "Myanmar", "Vietnam")) %>% 
+  select(-2)
+
+country_idp %>% mutate_at(vars(X2011, X2012, X2013, X2014, X2015, X2016, X2017, X2018, X2019), as.numeric)
+
+country_idp_long <- melt(data = country_idp,
+                         id.vars = "Country.Name",
+                         variable.name = "Year",
+                         value.name = "IDPs")
+
+country_idp_long_t <- as.tibble(country_idp_long) %>%
+  mutate_at(vars(IDPs), as.numeric) 
+
+country_idp_long_t
+
+country_idp_bar <- ggplot(country_idp_long, aes(x = Year, y = IDPs)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Year", y = "The number of displacements") +
+  facet_wrap(~Country.Name, ncol = 2) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  scale_y_log10() 
+
+country_idp_bar
+  
+ 
+
+
+
+
+
 ```
 
 
