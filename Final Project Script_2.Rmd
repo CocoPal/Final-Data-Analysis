@@ -1,0 +1,241 @@
+---
+title: "Natural disasters and people displacements in South East Asia"
+author: "Bokyung, Coco, IHolovko"
+date: "17 12 2020"
+output: html_document
+---
+
+```{r, message = FALSE, warning = FALSE}
+# Packages
+
+knitr::opts_chunk$set(echo = TRUE)
+#install.packages("tidyverse")
+library(tidyverse)
+#install.packages("reshape")
+library(readxl)
+#install.packages("reshape2")
+library(reshape2)
+library(reshape)
+#install.packages("writexl")
+library(writexl)
+library(dplyr)
+library(ggplot2)
+```
+
+# I.  Natural Disaster Data 
+
+### 1. Data Preprocessing 
+```{r, warning = FALSE}
+# download
+natural_disaster_2011_2020 <- read_excel("natural_disaster_2011_2020.xlsx")
+
+# delete unnecessary rows
+natural_disaster_2011_2020 <- natural_disaster_2011_2020[-1:-5, ]
+
+# rename the variables 
+names(natural_disaster_2011_2020) <- c('Dis_No', 'Year', 'Seq', 'Disaster_Group', 'Disaster_Subgroup', 'Disaster_Type', 'Disaster_Subtype', 'Disaster_Subsubtype', 'Event_Name', 'Entry_Criteria', 'Country', 'ISO', 'Region', 'Continent', 'Location', 'Origin', 'Associated_Dis', 'Associated_Dis2', 'OFDA_Response', 'Appeal', 'Declaration', 'Aid_Contribution', 'Dis_Mag_Value', 'Dis_Mag_Scale', 'Latitude', 'Longitude', 'Local_Time', 'River_Basin', 'Start_Year', 'Start_Month', 'Start_Day', 'End_Year', 'End_Month', 'End_Day', 'Total_Deaths', 'No_injured', 'No_affected', 'No_Homeless', 'Total_Affected', 'Reconstruction_Costs', 'Insured_Damages', 'Total_Damage', 'CPI')
+
+# delete unnecessary rows
+natural_disaster_2011_2020 <- natural_disaster_2011_2020[-1, ]
+
+# select necessary variables(columns)
+data <- select(natural_disaster_2011_2020, 'Dis_No', 'Year', 'Seq', 'Disaster_Type', 'Disaster_Subgroup', 'Country', 'Dis_Mag_Value', 'Dis_Mag_Scale', 'Latitude', 'Longitude', 'Start_Year', 'Start_Month', 'Start_Day', 'End_Year', 'End_Month', 'End_Day', 'Total_Deaths', 'No_injured', 'No_affected', 'No_Homeless', 'Total_Affected', 'Total_Damage')
+
+# select countries
+## Cambodia, Indonesia, Philippines (the),  Malaysia, Thailand, Lao People's Democratic Republic (the),  Myanmar,  Singapore,  Vietnam.
+data <- data %>%
+  filter(Country %in% c("Cambodia", "Indonesia", "Philippines (the)",  "Malaysia", "Thailand", "Lao People's Democratic Republic (the)",  "Myanmar",  "Singapore",  "Viet Nam"))
+
+```
+  
+### 2. Plots - ALL(Climatological, Meteorogical, Hydrological, Geophysical)  
+```{r}
+# Change in the number of all disasters (group by year)
+all <- data %>% 
+  filter(Disaster_Subgroup %in% c("Climatological", "Meteorological", "Hydrological", "Geophysical")) %>%
+  group_by(Year, Disaster_Subgroup) %>%
+  summarise(N=n(), na.rm = TRUE)
+
+# 1) stacked bar graph 
+all_bar <- ggplot(all, aes(x = Year, y = N, fill = Disaster_Subgroup)) + 
+  geom_bar(stat="identity") +
+  theme_bw() +
+  labs(x="Year", y="The number of event") + 
+  geom_text(aes(label= N), position = position_stack(vjust=0.5)) 
+all_bar
+
+# 2) separated bar graph
+all_bar2 <- ggplot(all, aes(x = Year, y = N, fill = Disaster_Subgroup)) +
+  geom_bar(stat="identity", position="dodge")+
+  theme_bw() + 
+  facet_wrap(~Disaster_Subgroup, ncol=2) +
+  labs(x="Year", y="The number of event") + 
+  geom_text(aes(label= N), size = 2.5) +
+  theme(axis.text.x=element_text(angle=90, hjust=1))
+all_bar2
+
+
+# Change in the number of disaster (group by country)
+country <- data %>% 
+  filter(Disaster_Subgroup %in% c("Climatological", "Meteorological", "Hydrological", "Geophysical")) %>%
+  group_by(Year, Disaster_Subgroup, Country) %>%
+  summarise(N=n(), na.rm = TRUE)
+
+# 1) stacked bar graph
+country_bar <- ggplot(country, aes(x = Year, y = N, fill = Disaster_Subgroup)) + 
+  geom_bar(stat="identity") +
+  labs(x="Year", y="The number of event") + 
+  facet_wrap(~Country, ncol=2) +  
+  theme_bw() +
+  theme(axis.text.x=element_text(angle=90, hjust=1)) 
+country_bar
+
+# 2) separated bar graph
+country_bar2 <- ggplot(country, aes(x = Year, y = N, fill = Disaster_Subgroup)) +
+  geom_bar(stat="identity", position="dodge")+
+  labs(x="Year", y="The number of event") + 
+  facet_wrap(~Country, ncol=2) +  
+  theme_bw() +
+  theme(axis.text.x=element_text(angle=90, hjust=1))
+country_bar2
+```
+
+### 3. Preparing data for merging 
+```{r}
+#1. Grouping data by year and country
+country_events <- data %>% 
+  filter(Disaster_Subgroup %in% c("Climatological", "Meteorological", "Hydrological", "Geophysical")) %>%
+  group_by(Year, Country) %>%
+  summarise(N=n(), na.rm = TRUE)
+
+###str(country_events)
+
+#2. Changing value
+country_events$Country <- recode(country_events$Country, "Philippines (the)" = "Philippines", "Lao People's Democratic Republic (the)" = "Lao PDR", "Viet Nam" = "Vietnam")
+``` 
+  
+  
+# II. IDPs Data  
+  
+### 1. Data Preprocessing 
+```{r cars, warning = FALSE}
+#download
+idp_dt <- read.table("IDP_data.csv", sep = ";", header = TRUE, stringsAsFactors = FALSE)
+
+# We have three countries for which we don't have data at all or not enough data for the analysis: Brunei, Singapore and Timor-Leste. So we take them out. Also we transform dataset into tibble format for later. 
+
+idp_clean <- idp_dt[-c(7,10,11),]
+idp_clean_t <- as.tibble(idp_clean)
+
+
+# Preparing data for individual countries 
+# 1) Selecting the countries and variables we need 
+country_idp <- idp_clean_t %>%
+  filter(Country.Name %in% c("Cambodia", "Indonesia", "Philippines", "Malaysia", "Thailand", "Lao PDR", "Myanmar", "Vietnam")) %>% 
+  select(-2)
+
+#2) Transforming variables to numeric format (to be able late to use log() function)
+country_idp <- country_idp %>% mutate_at(vars(X2011, X2012, X2013, X2014, X2015, X2016, X2017, X2018, X2019), as.numeric) 
+names(country_idp)[2] <- "2011"
+names(country_idp)[3]<- "2012"
+names(country_idp)[4]<- "2013"
+names(country_idp)[5]<- "2014"
+names(country_idp)[6]<- "2015"
+names(country_idp)[7]<- "2016"
+names(country_idp)[8]<- "2017"
+names(country_idp)[9]<- "2018"
+names(country_idp)[10]<- "2019"
+
+#3) Changing from wide to long format (to be able to use ggplot2)
+country_idp <- as.data.frame(country_idp)
+country_idp_long <- melt(data = country_idp,
+                         id.vars = "Country.Name",
+                         variable.name = "Year",
+                         value.name = "IDPs")
+names(country_idp_long) <- c('Country', 'Year', 'IDPs')
+
+#4) Again transforming to tibble format (as the process of making data long resulted in turning back again the data.frame)
+country_idp_long_t <- as.tibble(country_idp_long) %>%
+  mutate_at(vars(IDPs), as.numeric) 
+```
+  
+### 2. Plots 
+```{r}
+#Building graphs -> number of IDPs per country per year;
+country_idp_bar <- ggplot(country_idp_long_t, aes(x = Year, y = IDPs)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Year", y = "The number of displacements") +
+  facet_wrap(~Country, ncol = 2) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  scale_y_log10() 
+
+country_idp_bar
+```
+  
+  
+### III. Merging both datasets
+```{r}
+# merge
+merged_data <- left_join(country_idp_long_t, country_events, by = c("Year", "Country"))
+
+# NA imputation
+#1) Natural diseaster events 
+merged_data$N[is.na(merged_data$N)] <- 0 
+#2) IDPs
+merged_data$IDPs[is.na(merged_data$IDPs)] <- 0 
+  
+
+# Plot 1 - by country;
+#1) not change the scale of IDPs
+ggplot(merged_data, aes(x = Year)) +
+  geom_col(aes(y = N, fill="redfill")) +
+  geom_text(aes(y = N, label = N), fontface = "bold", vjust = 1.4, color = "black", size = 2) +
+  geom_line(aes(y =  IDPs / 100000, group = 1, color = 'blackline')) +
+  geom_text(aes(y =  IDPs / 100000, label = round(IDPs, 2)), vjust = 1.4, color = "black", size = 2) +
+  scale_y_continuous(sec.axis = sec_axis(trans = ~ . / 100000)) +
+   scale_fill_manual('', labels = 'The number of natural disester event', values = "#FF6666") +
+  scale_color_manual('', labels = 'The number of IDPs', values = 'black') +
+  theme_bw() +  
+  facet_wrap(~Country, ncol=2) +
+  theme(axis.text.x=element_text(angle=90, hjust=1))
+
+#2) change the scale of IDPs
+merged_data$IDPs <- merged_data$IDPs/100000
+
+ggplot(merged_data, aes(x = Year)) +
+  geom_col(aes(y = N, fill="redfill")) +
+  geom_text(aes(y = N, label = N), fontface = "bold", vjust = 1.4, color = "black", size = 2) +
+  geom_line(aes(y = IDPs, group = 1, color = 'blackline')) +
+  labs(x="Year") +
+  scale_y_continuous(sec.axis = sec_axis(~.)) +
+  scale_fill_manual('', labels = 'The number of natural disester event', values = "#FF6666") +
+  scale_color_manual('', labels = 'The number of IDPs', values = 'black') +
+  theme_bw() +  
+  facet_wrap(~Country, ncol=2) +
+  theme(axis.text.x=element_text(angle=90, hjust=1))
+
+# Plot 2 - whole region;
+
+#1. Creating dataset for plotting totals 
+  all_country <- merged_data %>%
+  group_by(Year) %>%
+  summarise(IDPs_total=sum(IDPs), events_total = sum(N))
+  
+#2. Overcoming the issue with needing two y-axis
+all_country$IDPs_total <- all_country$IDPs_total/100000
+
+#3. Creating the plot 
+ggplot(all_country, aes(x = Year)) +
+  geom_col(aes(y = events_total, fill = "redfill")) +
+  geom_line(aes(y = IDPs_total, group = 1, color = 'blackline')) +
+  geom_text(aes(y = events_total, label = events_total), fontface = "bold", vjust = 1.4, color = "black", size = 2) +
+  labs(x = "Year", y = "") +
+  ggtitle("The number of natural disaster events vs the number of IDPs in Southeast Asia") +
+  scale_fill_manual('', labels = 'The number of natural disester event', values = "#FF6666") +
+  scale_color_manual('', labels = 'The number of IDPs*100 000', values = 'black') +
+  theme_bw() +
+  theme(axis.text.x=element_text(angle=90, hjust=1))
+
+
+```
