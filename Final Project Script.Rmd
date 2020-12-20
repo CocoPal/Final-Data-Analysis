@@ -187,19 +187,32 @@ merged_data$IDPs[is.na(merged_data$IDPs)] <- 0
   
 
 # Plot 
-ggplot() + 
-  geom_bar(aes(x = merged_data$Year, y = merged_data$N), stat = "identity", fill = "grey") +
-  geom_line(aes(x = merged_data$Year, y = merged_data$IDPs), size = 2, color = "blue") + 
-  scale_y_continuous(name = "the number of events", 
-     sec.axis = sec_axis(~., name = "the number of IDPs"))
-
-dual <- ggplot(merged_data, aes(x = Year))
-dual <- dual + geom_bar(aes(y = N), stat="identity", position="dodge") +  facet_wrap(~Country, ncol=2) +  
-  theme_bw() +
+#1) not change the scale of IDPs
+ggplot(merged_data, aes(x = Year)) +
+  geom_col(aes(y = N, fill="redfill")) +
+  geom_text(aes(y = N, label = N), fontface = "bold", vjust = 1.4, color = "black", size = 2) +
+  geom_line(aes(y =  IDPs / 100000, group = 1, color = 'blackline')) +
+  geom_text(aes(y =  IDPs / 100000, label = round(IDPs, 2)), vjust = 1.4, color = "black", size = 2) +
+  scale_y_continuous(sec.axis = sec_axis(trans = ~ . / 100000)) +
+   scale_fill_manual('', labels = 'The number of natural disester event', values = "#FF6666") +
+  scale_color_manual('', labels = 'The number of IDPs', values = 'black') +
+  theme_bw() +  
+  facet_wrap(~Country, ncol=2) +
   theme(axis.text.x=element_text(angle=90, hjust=1))
 
-dual <- dual + geom_line(aes(y = IDPs), color = "red", size = 2)
+#2) change the scale of IDPs
+merged_data$IDPs <- merged_data$IDPs/100000
 
-dual
+ggplot(merged_data, aes(x = Year)) +
+  geom_col(aes(y = N, fill="redfill")) +
+  geom_text(aes(y = N, label = N), fontface = "bold", vjust = 1.4, color = "black", size = 2) +
+  geom_line(aes(y = IDPs, group = 1, color = 'blackline')) +
+  labs(x="Year") +
+  scale_y_continuous(sec.axis = sec_axis(~.)) +
+  scale_fill_manual('', labels = 'The number of natural disester event', values = "#FF6666") +
+  scale_color_manual('', labels = 'The number of IDPs', values = 'black') +
+  theme_bw() +  
+  facet_wrap(~Country, ncol=2) +
+  theme(axis.text.x=element_text(angle=90, hjust=1))
 
 ```
