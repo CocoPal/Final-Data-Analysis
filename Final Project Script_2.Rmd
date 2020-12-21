@@ -207,16 +207,16 @@ country_plot <- ggplot(merged_data, aes(x = Year)) +
   geom_col(aes(y = N, fill="redfill")) +
   geom_text(aes(y = N, label = N), fontface = "bold", vjust = -0.2, color = "black", size = 2) +
   geom_line(aes(y = IDPs, group = 1, color = 'blackline')) +
-  labs(x="Year") +
+  labs(x="Year", y = "") +
   scale_y_continuous(sec.axis = sec_axis(~.)) +
   scale_fill_manual('', labels = 'The number of natural disester event', values = "#009999") +
-  scale_color_manual('', labels = 'The number of IDPs', values = "#FF6633") +
+  scale_color_manual('', labels = 'The number of IDPs*100 000', values = "#FF6633") +
   theme_bw() +  
   facet_wrap(~Country, ncol=2) +
   theme(axis.text.x=element_text(angle=90, hjust=1))
-
 country_plot
 ggsave("country_plot.jpg")
+
 
 # Plot 2 - whole region;
 
