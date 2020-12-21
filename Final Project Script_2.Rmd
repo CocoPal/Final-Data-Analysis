@@ -205,40 +205,46 @@ merged_data$IDPs <- merged_data$IDPs/100000
 
 country_plot <- ggplot(merged_data, aes(x = Year)) +
   geom_col(aes(y = N, fill="redfill")) +
-  geom_text(aes(y = N, label = N), fontface = "bold", vjust = -0.2, color = "black", size = 2) +
-  geom_line(aes(y = IDPs, group = 1, color = 'blackline')) +
-  labs(x="Year", y = "") +
-  scale_y_continuous(sec.axis = sec_axis(~.)) +
+  geom_text(aes(y = N, label = N), fontface = "bold", vjust = -0.2, color = "black", size = 1.8) +
+  geom_line(aes(y = IDPs, group = 1, color = 'blackline')) + 
+  labs(x="Year", y = "") + 
+  geom_point(aes(y = IDPs), color = "#FF3300", size = 0.2) +
   scale_fill_manual('', labels = 'The number of natural disester event', values = "#009999") +
   scale_color_manual('', labels = 'The number of IDPs*100 000', values = "#FF6633") +
   theme_bw() +  
   facet_wrap(~Country, ncol=2) +
-  theme(axis.text.x=element_text(angle=90, hjust=1))
+  theme(axis.text.x=element_text(angle=90, hjust=1)) +
+  ggtitle("The number of natural disaster events \n vs \n the number of IDPs in Southeast Asia by country") +
+  theme(plot.title = element_text(family = "serif", face = "bold", hjust = 0.5, size = 12))
 country_plot
+
 ggsave("country_plot.jpg")
 
 
 # Plot 2 - whole region;
 
 #1. Creating dataset for plotting totals 
-  all_country <- merged_data %>%
+all_country <- merged_data %>%
   group_by(Year) %>%
   summarise(IDPs_total=sum(IDPs), events_total = sum(N))
   
-#2. Overcoming the issue with needing two y-axis
-all_country$IDPs_total <- all_country$IDPs_total/100000
-
-#3. Creating the plot 
-ggplot(all_country, aes(x = Year)) +
+#2. Creating the plot 
+all_plot <- ggplot(all_country, aes(x = Year)) +
   geom_col(aes(y = events_total, fill = "redfill")) +
   geom_line(aes(y = IDPs_total, group = 1, color = 'blackline')) +
-  geom_text(aes(y = events_total, label = events_total), fontface = "bold", vjust = 1.4, color = "black", size = 2) +
+  geom_text(aes(y = events_total, label = events_total), fontface = "bold", position = position_stack(vjust=0.5), color = "black", size = 2.5) +
+  geom_text(aes(y = IDPs_total, label = IDPs_total), fontface = "bold", vjust = -1, color = "black", size = 2.5) + 
+  geom_point(aes(y = IDPs_total), color = "#FF3300") +
   labs(x = "Year", y = "") +
   ggtitle("The number of natural disaster events vs the number of IDPs in Southeast Asia") +
-  scale_fill_manual('', labels = 'The number of natural disester event', values = "#FF6666") +
-  scale_color_manual('', labels = 'The number of IDPs*100 000', values = 'black') +
+  scale_fill_manual('', labels = 'The number of natural disester event', values = "#009999") +
+  scale_color_manual('', labels = 'The number of IDPs*100 000', values = "#FF6633") +
   theme_bw() +
-  theme(axis.text.x=element_text(angle=90, hjust=1))
+  theme(axis.text.x=element_text(angle=90, hjust=1)) +
+  theme(plot.title = element_text(family = "serif", face = "bold", size = 13)) 
+
+all_plot
+ggsave("all_plot.jpg")
 
 
 ```
