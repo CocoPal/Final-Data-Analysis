@@ -1,0 +1,449 @@
+---
+title: <center> **Do Instances of Natural Disasters Correlate with the Number of Internally Displaced Persons in Southeast Asia?** </center>
+date: <center> 17 12 2020 </center>
+output: html_document
+---
+<br/>
+
+##### **Contributors:** <br/>
+Bokyung Kang (1130bokyung@gmail.com): concept, initial research, and handling of natural disaster data, visualisation;<br/>
+Iryna Holovko (iryna.holovko@gmail.com): concept, handling of IDP data, visualisation, analysis of the results;<br/>
+Sarah “Coco” Palacios (coco.palacios14@gmail.com): background research, writing of report, construction of PPT presentation
+<br/>
+<br/>
+
+![](https://cdn.pixabay.com/photo/2020/02/29/22/38/demonstration-4891275_1280.jpg)
+
+### **Brief Synopsis** 
+This report explores the issue of internal displacement of people due to natural disasters in Southeast Asia. Climate change has an effect on weather patterns and subsequent natural disasters, which in turn forces millions of people to flee their homes. Displacement in itself has consequences for the health and sociocultural relations for both the home and host communities. Due to limitations in available data, we were unsuccessful in finding a correlation between the number of natural disaster events and the number of displacements of people caused by these events. However, we found that the frequency of meteorological and hydrological events is increasing in some most vulnerable parts of the region, thus we maintain that this is a serious issue and provide recommendations for addressing it.
+<br/>
+<br/>
+
+### **Introduction**
+As the world continues to feel the effects of climate change, the increasing challenges that this presents have life-changing consequences for many. Some of those challenges are natural disasters, which are of particular concern when human lives and livelihoods are severely and negatively impacted. Natural disasters can have devastating consequences, forcing many to become displaced. The purpose of this report is to explore the correlation between instances of natural disasters and internally displaced persons in Southeast Asia. We provide background information on the issue and present the results of our analysis of 8 countries for the period between 2011 to 2020 using data from the World Bank Data Catalog and The Centre for Research on Epidemiology of Disasters’ (CRED) International Disaster Database (EM-DAT). 
+<br/>
+
+The Centre for Research on Epidemiology of Disasters defines a disaster as an event affecting at least 100 people (2015). According to the World Risk Report 2017, Asia has been particularly impacted by a multitude of sudden-onset and slow-onset natural disasters. Slow-onset events include droughts and extreme temperature and can threaten agricultural systems. Sudden-onset events include earthquakes, hurricanes, typhoons, cyclones, landslides, volcanic activity, wildfire, tsunamis, and floods. Sudden-onset events, depending on their severity, can wipe out whole areas; destroying homes, businesses, and livelihoods. Southeast Asia is particularly vulnerable because of its diverse geography and large populations in disaster prone areas (CRED, 2015).
+<br/>
+<br/>
+
+### **Natural Disasters as a Consequence of Climate Change**
+The term “global warming” refers to the gradual increase in average temperature of the Earth’s atmosphere starting in the 20th century (Berlemann, 2017). “Climate change” is an overarching term for global warming as well as the resulting weather changes. The scientific community attributes global warming to “human activities” such as those that contribute to an increase in greenhouse gas emissions (Selin, n.d.) such as carbon dioxide (CO2), methane (CH4), and nitrous oxide (N2O) (Cubasch et al., 2013). Preceding literature links climate change to unusual patterns of weather events, which in turn lead to natural disasters (Anderson & Bausch, 2006; Cubasch et al., 2013). 
+<br/>
+
+In order to understand how climate change can lead to an increase in natural disasters, we must consider it from a scientific perspective. It is important to note that weather events occur naturally, but climate change impacts the occurrence, frequency, and severity (Seneviratne et al., 2012). For example, as the world’s temperature increases, so does the temperature of the ocean’s surface, increasing the level of precipitation in the air, which is one of the main drivers of storms. Similarly, as the temperature of land surface rises, so does the likelihood of drought and wildfire. Seneviratne et al. (2012) found that a rise in temperature leads to the melting of glaciers and permafrost, which in turn leads to an increase in mass movement. 
+<br/>
+
+Additionally, climate change has an indirect effect on the occurrence of earthquakes and volcanic activity as a result of heavy rainfall and ice loss. A study by Liu at al. (2009) found that typhoons can trigger a series of small earthquakes. A researcher from the University of Miami, Shimon Wdowinski found a link between rainfall from heavy storms and earthquakes, due to erosion decreasing the weight on the boundaries between the faults of tectonic plates, making it easier for them to move (McGuire, 2016). Furthermore, the loss of ice, which is a consequence of climate change, has been linked to an increase in volcanic eruptions (Swindles et al., 2018).
+<br/>
+
+Extreme natural disasters can lead to displaced people. According to OCHA, “Internally Displaced Persons (IDPs) are people who are forced to flee their homes due to armed conflict, generalized violence, violations of human rights, natural or human-made disasters, but who remain within their own country.” For the purpose of this report, we will be focusing on internally displaced people due to natural disasters. Refugees or migrants that had to flee to other countries (crossing national borders) were not included in our analysis.
+<br/>
+<br/>
+
+### **Social Impact of Displacement**
+Displacement in itself leads to a number of concerns, particularly the impact on health and socio-cultural relations of both the home and host communities, which we will explore in the next section of this report. A study by Jang et al. (2020) found that displacement due to natural disasters in Southeast Asia has negative effects on health. According to the World Health Organization (2000), displaced persons are particularly vulnerable to diseases. When they arrive in their host communities, they face the risk of being exposed to diseases and illnesses that they had not experienced in their home communities. Displaced people also experience negative effects on their mental health. For example, due to the loss of their homes and livelihoods, as well as difficulties they encounter in the process of integration, they are more likely to suffer from depression than non-displaced people (Thomas, 2004). Health needs include new risks, but also pre-existing conditions that require continued care. This puts strain on the host community’s health system, to accommodate the needs of a larger population and surge in new patients. 
+<br/>
+
+Sudden-onset natural disasters wipe away homes, businesses, schools, etc., leaving the victims with merely the clothes on their backs. This causes strain on other necessary resources within the host community such as housing, education, food, and employment or other financial support. When members of the host community begin to feel the effects of resource scarcity, the new arrivals are an easy target for blame and resentment, creating an environment for tension and possible conflict. 
+<br/>
+<br/>
+
+### **Methods**
+In order to explore this issue, we created a model to assess any possible correlation between natural disasters and displacement. For the purpose of this report, we chose to focus on Southeast Asia because this region is particularly prone to natural disasters due to its geographical location. The countries included in our study are Cambodia, Indonesia, Philippines, Malaysia, Thailand, Lao PDR, Myanmar, and Vietnam. In order to explore the correlation between natural disasters and the number of internally displaced persons, we compared data on IDPs from the World Bank Data Catalog and natural disaster data from the Centre for Research on Epidemiology of Disasters’ (CRED) International Disaster Database (EM-DAT). The World Bank Data Catalog features data on annual new displacements from the Internal Displacement Monitoring Centre (IDMC), which collects data on both violence and disaster-related displacements in all regions. "New Displacement" refers to the number of new cases or incidents of displacement recorded over the specified year, not the number of people displaced because people may have been displaced more than once. Our data for this analysis was limited to the time period of 2011 to 2020. 
+<br/>
+
+The data from EM-DAT and IDMC include the following categories of natural disasters: <br/>
+- Meteorological: extreme temperature, fog, storm <br/>
+- Hydrological: flood, landslide, wave action <br/>
+- Climatological: drought, glacial lake outburst, wildfire <br/>
+- Geophysical: earthquake, mass movement, volcanic activity <br/>
+<br/>
+
+Although some geophysical disasters are not directly related to changing climate (like earthquakes and volcanic activity), our IDP data included persons displaced as a consequence of this category of events. Thus we had to keep this subgroup of events in our analysis. 
+<br/>
+<br/>
+
+### **Results/Analysis of the Data**
+Through our analysis of the data, we were unable to see an increase in frequency of natural disasters when looking at the total number of natural disaster events in the region, but also when looking at the different subgroups of those events. 
+<br/>
+
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+# Packages
+
+knitr::opts_chunk$set(echo = TRUE)
+#install.packages("tidyverse")
+library(tidyverse)
+#install.packages("reshape")
+library(readxl)
+#install.packages("reshape2")
+library(reshape2)
+library(reshape)
+#install.packages("writexl")
+library(writexl)
+library(dplyr)
+library(ggplot2)
+```
+
+```{r, warning = FALSE, message = FALSE, echo = FALSE}
+# I.  Natural Disaster Data 
+
+### 1. Data Preprocessing 
+# download
+natural_disaster_2011_2020 <- read_excel("natural_disaster_2011_2020.xlsx")
+
+# delete unnecessary rows
+natural_disaster_2011_2020 <- natural_disaster_2011_2020[-1:-5, ]
+
+# rename the variables 
+names(natural_disaster_2011_2020) <- c('Dis_No', 'Year', 'Seq', 'Disaster_Group', 'Disaster_Subgroup', 'Disaster_Type', 'Disaster_Subtype', 'Disaster_Subsubtype', 'Event_Name', 'Entry_Criteria', 'Country', 'ISO', 'Region', 'Continent', 'Location', 'Origin', 'Associated_Dis', 'Associated_Dis2', 'OFDA_Response', 'Appeal', 'Declaration', 'Aid_Contribution', 'Dis_Mag_Value', 'Dis_Mag_Scale', 'Latitude', 'Longitude', 'Local_Time', 'River_Basin', 'Start_Year', 'Start_Month', 'Start_Day', 'End_Year', 'End_Month', 'End_Day', 'Total_Deaths', 'No_injured', 'No_affected', 'No_Homeless', 'Total_Affected', 'Reconstruction_Costs', 'Insured_Damages', 'Total_Damage', 'CPI')
+
+# delete unnecessary rows
+natural_disaster_2011_2020 <- natural_disaster_2011_2020[-1, ]
+
+# select necessary variables(columns)
+data <- select(natural_disaster_2011_2020, 'Dis_No', 'Year', 'Seq', 'Disaster_Type', 'Disaster_Subgroup', 'Country', 'Dis_Mag_Value', 'Dis_Mag_Scale', 'Latitude', 'Longitude', 'Start_Year', 'Start_Month', 'Start_Day', 'End_Year', 'End_Month', 'End_Day', 'Total_Deaths', 'No_injured', 'No_affected', 'No_Homeless', 'Total_Affected', 'Total_Damage')
+
+# select countries
+## Cambodia, Indonesia, Philippines (the),  Malaysia, Thailand, Lao People's Democratic Republic (the),  Myanmar,  Singapore,  Vietnam.
+data <- data %>%
+  filter(Country %in% c("Cambodia", "Indonesia", "Philippines (the)",  "Malaysia", "Thailand", "Lao People's Democratic Republic (the)",  "Myanmar",  "Singapore",  "Viet Nam"))
+
+```
+<br/>
+
+  
+```{r, warning = FALSE, message = FALSE, echo = FALSE}
+### 2. Plots - ALL(Climatological, Meteorogical, Hydrological, Geophysical)
+# Change in the number of all disasters (group by year)
+all <- data %>% 
+  filter(Disaster_Subgroup %in% c("Climatological", "Meteorological", "Hydrological", "Geophysical")) %>%
+  group_by(Year, Disaster_Subgroup) %>%
+  summarise(N=n(), na.rm = TRUE)
+
+# 1) stacked bar graph 
+all_bar <- ggplot(all, aes(x = Year, y = N, fill = Disaster_Subgroup)) + 
+  geom_bar(stat="identity") +
+  theme_bw() +
+  labs(x="Year", y="The number of events") + 
+  geom_text(aes(label= N), position = position_stack(vjust=0.5)) +
+  ggtitle("Graph 1: \n Frequency of natural disasters in Southeast Asia in the period 2011-2020") +
+  theme(plot.title = element_text(family = "serif", face = "bold", hjust = 0.5, size = 11))
+all_bar
+```
+<br/> 
+*This graph also includes Singapore and Timore-Leste*
+<br/>
+
+Graph 1 shows the total number of natural disaster events in Southeast Asia from 2011 to 2020. In this graph we see that the highest occurrences of natural disasters belong to the hydrological and meteorological disaster subgroup. Disaster types within these categories include storms and floods. Most countries in Southeast Asia are located in or near seawater areas, making them especially vulnerable to these disasters. This graph also illustrates the number of geophysical disasters, such as earthquakes and volcanic activity. This number appears small, but it is important to note that it does not reflect the scope of impact these events might have had on the number of IDPs. 
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+# 2) separated bar graph
+all_bar2 <- ggplot(all, aes(x = Year, y = N, fill = Disaster_Subgroup)) +
+  geom_bar(stat="identity", position="dodge")+
+  theme_bw() + 
+  facet_wrap(~Disaster_Subgroup, ncol=2) +
+  labs(x="Year", y="The number of events") + 
+  geom_text(aes(label= N), size = 2.5) +
+  theme(axis.text.x=element_text(angle=90, hjust=1))
+```
+<br/> 
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, eval = FALSE}
+# Change in the number of disaster (group by country)
+country <- data %>% 
+  filter(Disaster_Subgroup %in% c("Climatological", "Meteorological", "Hydrological", "Geophysical")) %>%
+  group_by(Year, Disaster_Subgroup, Country) %>%
+  summarise(N=n(), na.rm = TRUE)
+
+# 1) stacked bar graph
+country_bar <- ggplot(country, aes(x = Year, y = N, fill = Disaster_Subgroup)) + 
+  geom_bar(stat="identity") +
+  labs(x="Year", y="The number of events") + 
+  facet_wrap(~Country, ncol=2) +  
+  theme_bw() +
+  theme(axis.text.x=element_text(angle=90, hjust=1)) 
+country_bar
+```
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, eval = FALSE}
+# 2) separated bar graph
+country_bar2 <- ggplot(country, aes(x = Year, y = N, fill = Disaster_Subgroup)) +
+  geom_bar(stat="identity", position="dodge")+
+  labs(x="Year", y="The number of events") + 
+  facet_wrap(~Country, ncol=2) +  
+  theme_bw() +
+  theme(axis.text.x=element_text(angle=90, hjust=1)) +
+  ggtitle("Frequency of natural disasters in Southeast Asia \n in the period 2011-2020 by country") +
+  theme(plot.title = element_text(family = "serif", face = "bold", hjust = 0.5, size = 10))
+country_bar2
+```
+  
+
+
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+### 3. Preparing data for merging 
+#1. Grouping data by year and country
+country_events <- data %>% 
+  filter(Disaster_Subgroup %in% c("Climatological", "Meteorological", "Hydrological", "Geophysical")) %>%
+  group_by(Year, Country) %>%
+  summarise(N=n(), na.rm = TRUE)
+
+#2. Changing value
+country_events$Country <- recode(country_events$Country, "Philippines (the)" = "Philippines", "Lao People's Democratic Republic (the)" = "Lao PDR", "Viet Nam" = "Vietnam")
+``` 
+  
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+# II. IDPs Data  
+  
+### 1. Data Preprocessing 
+#download
+idp_dt <- read.table("IDP_data.csv", sep = ";", header = TRUE, stringsAsFactors = FALSE)
+
+# We have three countries for which we don't have data at all or not enough data for the analysis: Brunei, Singapore and Timor-Leste. So we take them out. Also we transform dataset into tibble format for later. 
+
+idp_clean <- idp_dt[-c(7,10,11),]
+idp_clean_t <- as.tibble(idp_clean)
+
+
+# Preparing data for individual countries 
+# 1) Selecting the countries and variables we need 
+country_idp <- idp_clean_t %>%
+  filter(Country.Name %in% c("Cambodia", "Indonesia", "Philippines", "Malaysia", "Thailand", "Lao PDR", "Myanmar", "Vietnam")) %>% 
+  select(-2)
+
+#2) Transforming variables to numeric format (to be able late to use log() function)
+country_idp <- country_idp %>% mutate_at(vars(X2011, X2012, X2013, X2014, X2015, X2016, X2017, X2018, X2019), as.numeric) 
+names(country_idp)[2] <- "2011"
+names(country_idp)[3]<- "2012"
+names(country_idp)[4]<- "2013"
+names(country_idp)[5]<- "2014"
+names(country_idp)[6]<- "2015"
+names(country_idp)[7]<- "2016"
+names(country_idp)[8]<- "2017"
+names(country_idp)[9]<- "2018"
+names(country_idp)[10]<- "2019"
+
+#3) Changing from wide to long format (to be able to use ggplot2)
+country_idp <- as.data.frame(country_idp)
+country_idp_long <- melt(data = country_idp,
+                         id.vars = "Country.Name",
+                         variable.name = "Year",
+                         value.name = "IDPs")
+names(country_idp_long) <- c('Country', 'Year', 'IDPs')
+
+#4) Again transforming to tibble format (as the process of making data long resulted in turning back again the data.frame)
+country_idp_long_t <- as.tibble(country_idp_long) %>%
+  mutate_at(vars(IDPs), as.numeric) 
+
+### 2. Plots 
+
+#Building graphs -> number of IDPs per country per year;
+country_idp_bar <- ggplot(country_idp_long_t, aes(x = Year, y = IDPs)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Year", y = "The number of displaced persons") +
+  facet_wrap(~Country, ncol = 2) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  scale_y_log10() 
+```
+  
+  
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+### III. Merging both datasets
+
+# merge
+merged_data <- left_join(country_idp_long_t, country_events, by = c("Year", "Country"))
+
+# NA imputation
+#1) Natural diseaster events 
+merged_data$N[is.na(merged_data$N)] <- 0 
+#2) IDPs
+merged_data$IDPs[is.na(merged_data$IDPs)] <- 0 
+  
+# change the scale of IDPs
+merged_data$IDPs_s <- merged_data$IDPs/100000
+```
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+# Plot 1 - whole region;
+
+#1. Creating dataset for plotting totals 
+all_country <- merged_data %>%
+  group_by(Year) %>%
+  summarise(IDPs_total=sum(IDPs_s), events_total = sum(N))
+  
+#2. Creating the plot 
+all_plot <- ggplot(all_country, aes(x = Year)) +
+  geom_col(aes(y = events_total, fill = "redfill")) +
+  geom_line(aes(y = IDPs_total, group = 1, color = 'blackline')) +
+  geom_text(aes(y = events_total, label = events_total), fontface = "bold", position = position_stack(vjust=0.5), color = "black", size = 2.5) +
+  geom_text(aes(y = IDPs_total, label = IDPs_total), fontface = "bold", vjust = -1, color = "black", size = 2.5) + 
+  geom_point(aes(y = IDPs_total), color = "#FF3300") +
+  labs(x = "Year", y = "") +
+  ggtitle("Graph 2: \n The number of natural disaster events \n vs \n the number of IDPs in Southeast Asia") +
+  scale_fill_manual('', labels = 'The number of natural disester event', values = "#009999") +
+  scale_color_manual('', labels = 'The number of IDPs*100 000', values = "#FF6666") +
+  theme_bw() +
+  theme(axis.text.x=element_text(angle=90, hjust=1)) +
+  theme(plot.title = element_text(family = "serif", face = "bold", hjust = 0.5, size = 11)) 
+
+all_plot
+```
+<br/> 
+Within the scope of our research we were unable to identify correlation between the number of natural disasters and the number of displacements caused. Graph 2 illustrates that for the peaking annual displacements in 2013-2014 and 2016 there are no corresponding increase in the number of disaster events. For the years of 2011 and 2019 when the number of disasters was the highest, there were by 3.71- 4.24 millions displacements fewer than in 2013.
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, eval = FALSE}
+
+# Plot 2 - by country;
+#1) not change the scale of IDPs
+ggplot(merged_data, aes(x = Year)) +
+  geom_col(aes(y = N, fill="redfill")) +
+  geom_text(aes(y = N, label = N), fontface = "bold", vjust = 1.4, color = "black", size = 2) +
+  geom_line(aes(y =  IDPs / 100000, group = 1, color = 'blackline')) +
+  geom_text(aes(y =  IDPs / 100000, label = round(IDPs, 2)), vjust = 1.4, color = "black", size = 2) +
+  scale_y_continuous(sec.axis = sec_axis(trans = ~ . / 100000)) +
+   scale_fill_manual('', labels = 'The number of natural disasters events', values = "#FF6666") +
+  scale_color_manual('', labels = 'The number of IDPs', values = 'black') +
+  theme_bw() +  
+  facet_wrap(~Country, ncol=2) +
+  theme(axis.text.x=element_text(angle=90, hjust=1))
+```
+<br/>
+<br/>
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+country_plot <- ggplot(merged_data, aes(x = Year)) +
+  geom_col(aes(y = N, fill="redfill")) +
+  geom_text(aes(y = N, label = N), fontface = "bold", vjust = -0.2, color = "black", size = 1.8) +
+  geom_line(aes(y = IDPs_s, group = 1, color = 'blackline')) + 
+  labs(x="Year", y = "") + 
+  geom_point(aes(y = IDPs_s), color = "#FF3300", size = 0.2) +
+  scale_fill_manual('', labels = 'The number of natural disasters events', values = "#009999") +
+  scale_color_manual('', labels = 'The number of IDPs*100 000',  values = "#FF6666") +
+  theme_bw() +  
+  facet_wrap(~Country, ncol=2) +
+  theme(axis.text.x=element_text(angle=90, hjust=1)) +
+  ggtitle("Graph 3: \n The number of natural disaster events \n vs \n the number of IDPs in Southeast Asia by country") +
+  theme(plot.title = element_text(family = "serif", face = "bold", hjust = 0.5, size = 12))
+country_plot
+```
+<br/>
+<br/>
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+#Alternative plotting with separating countries in two groups 
+#Group # 1:
+
+Cam_Lao_V_Tai <- merged_data %>%
+  filter(Country %in% c("Cambodia", "Lao PDR", "Vietnam", "Thailand")) %>%
+  group_by(Year, Country) %>%
+  summarise(IDPs_total=sum(IDPs_s), events_total = sum(N))
+
+Cam_Lao_V_Tai_plot <- ggplot(Cam_Lao_V_Tai, aes(x = Year)) +
+  geom_col(aes(y = events_total, fill="redfill")) +
+  geom_text(aes(y = events_total, label = events_total), fontface = "bold", vjust = 1.4, color = "black", size = 2) +
+  geom_line(aes(y = IDPs_total, group = 1, color = 'blackline')) +
+  labs(x="Year") + 
+  geom_point(aes(y = IDPs_total), color = "#FF3300", size = 0.2) +
+  scale_fill_manual('', labels = 'The number of natural disasters events', values = "#009999") +
+  scale_color_manual('', labels = 'The number of IDPs*100 000',  values = "#FF6666") +
+  theme_bw() +  
+  facet_wrap(~Country, ncol=2) +
+  theme(axis.text.x=element_text(angle=90, hjust=1)) +
+  ggtitle("Graph 4: \n The number of natural disaster events \n vs \n the number of IDPs in Cambodia, Lao PDR, Thailand, Vietnam") +
+  theme(plot.title = element_text(family = "serif", face = "bold", hjust = 0.5, size = 10))
+Cam_Lao_V_Tai_plot
+```
+<br/> 
+<br/>
+
+Looking at the data by country, we see Indonesia and the Philippines as the two countries with the highest number of disaster events in the given time period but these numbers do not correlate with the number of displacements (Graphs 3). A closer look at the countries with low number of events (Graph 4) suggested some correlation in case of Vietnam but this correlation is not strong (observed only in some years but not in the others) so it does not change our findings.     
+<br/>
+<br/>
+
+### **Limitations** <br/>
+Our main limitations concern data availability. Our research covers the time period from 2011 to 2020 due to the availability of data on natural disaster related displacement in the region. Although IDMC collects data on IDPs starting from the year 1998, the available data on Southeast Asia and natural disaster related events is limited to the time period beginning from the year 2011. For some Southeast Asian countries it is not available at all. For this reason, our study is limited to the 8 countries listed above. It is very likely that this time period is too short to be able to observe a trend in the frequency of climate-related disasters and longer time periods (several decades) may be necessary to be able to observe changes that occur. Additionally, the scale of events is not accounted for in our analysis. This is significant because depending on the scale of the event, it could have an effect on the number of displacements, which would have an impact on the results. Therefore we conclude that further research with a more lengthy time period and information on the disaster scope is required in order to determine whether or not a correlation exists. 
+<br/>
+<br/>
+
+### **Conclusion and Recommendations** <br/>
+Throughout this report, we explored the issue of internal displacement due to natural disasters in Southeast Asia. We identified over 51,4 million displacements related to natural disasters over the period of 8 years in 8 countries of the region. Due to limitations in available data, we were not successful in finding a correlation between the number of natural disaster events and the number of displacements of people caused by these events. Due to the short time period in our data we were unable to trace increasing or decreasing trends in the number of climate-related events. Moreover, different natural disasters have a different scale and magnitude of impact on the number of displaced people. Not being able to account for the factor of scale could have contributed to an inability to identify a correlation.
+<br/> 
+
+Despite these results, we maintain that internal displacement due to natural disasters is an issue that should be addressed. Displacement has negative implications for the health and socio-cultural relations of people. In light of this, we would like to conclude this report with the following recommendations:
+<br/> 
+
+&nbsp;1. Disaster management planning - Cities and their citizens should create a plan, including an evacuation route, and early warning technologies, to prepare for natural disasters ahead of time. This of course requires proper and accurate information to understand which disasters are most likely to occur. City officials should work together with scientists to be able to obtain such information. 
+<br/> 
+
+&nbsp;2. Sustainable development - In the process of city building/planning, the aforementioned information should be considered, to reduce the impact of natural disasters.
+<br/> 
+
+&nbsp;3. The international community needs to take climate change more seriously - Since the beginning of the industrial revolution, the level of greenhouse gases entering the atmosphere continues to rise. This is simply unsustainable and the Earth and its inhabitants are suffering the consequences. 
+<br/> 
+
+&nbsp;4. International cooperation - Developing countries have the least amount of resources to implement the aforementioned adaptation strategies. This is where international organizations and wealthier countries can make a difference. These actors should provide aid to assist these pre-disaster strategies, as well with post-disaster needs such as resources for rebuilding and emergency healthcare. They should also provide necessary aid to the host communities, to minimize the impact they face when accepting displaced people.
+<br/>
+<br/>
+<br/>
+<br/>
+  
+### **Bibliography** <br/>
+  
+Anderson, J. & Bausch, C. (2006). Climate change and natural disasters: Scientific evidence of a possible relation between recent natural disasters and climate change. (Brief number 02a/2006). Institute for European Environmental Policy. https://www.europarl.europa.eu/meetdocs/2004_2009/documents/dv/ieep_cc_natural_disasters_/ieep_cc_natural_disasters_en.pdf
+<br/>
+
+Berlemann, M. & Steinhardt, M. F. (2017). Climate change, natural disasters, and migration — a survey of the empirical evidence. CESifo Economic Studies, 353-385. 
+DOI: 10.1093/cesifo/ifx019
+<br/>
+
+CRED Centre for Research on the Epidemiology of Disasters. (2015). The human cost of 
+natural disasters: A global perspective. Retrieved on December 2016, from, https://reliefweb.int/sites/reliefweb.int/files/resources/PAND_report.pdf
+<br/>
+
+CRED Centre for Research on the Epidemiology of Disasters. (2020). EM-Dat. [data file]. 
+UCLouvain, Brussels, Belgium: D. Guha-Sapir.
+<br/>
+
+Cubasch, U. D., Wuebbles, D., Chen, M.C., Facchini, D., Frame, N. Mahowald, & Winther, J. G (2013). Introduction. In T.F. Stocker, D. Qin, G. K. Plattner, M. Tignor, S.K. Allen, J. Boschung, A. Nauels, Y. Xia, V. Bex & P.M. Midgley (Eds.), Climate Change 2013: The Physical Science Basis. Contribution of Working Group I to the Fifth Assessment Report of the Intergovernmental Panel on Climate Change (pp. 119-158). Cambridge, UK and New York, NY, USA: Cambridge University Press.
+<br/>
+
+Jang, S., Ekyalongo, Y., & Kim, H. (2020). Systematic review of displacement and health 
+impact from natural disasters in Southeast Asia. Disaster Medicine and Public Health Preparedness, 1-10. DOI: 10.1017/dmp.2019.125
+<br/>
+
+Liu, C., Linde, A. T., & Sacks, S. (2009). Slow earthquakes triggered by typhoons. Nature, 
+459. 833–836. DOI: 10.1038/nature08042
+<br/>
+
+McGuire, B. (2016). How climate change triggers earthquakes, tsunamis and volcanoes. The 
+Guardian. https://www.theguardian.com/world/2016/oct/16/climate-change
+-triggers-earthquakes-tsunamis-volcanoes
+<br/>
+
+OCHA United Nations Office for the Coordination of Humanitarian Affairs. (n.d.) Internal 
+displacement. https://www.unocha.org/fr/themes/internal-displacement
+<br/>
+
+Selin, H. (n.d.) Global warming. Britannica. 
+https://www.britannica.com/science/global-warming
+<br/>
+
+Swindles, G. T., Watson, E. J., Savov, I. P., Lawson, I. T., Schmidt, A., Hooper, A., Cooper, C. 
+L., Connor, C. B., Gloor, M., & Carrivick, J. L. (2018). Climate control on Icelandic volcanic activity during the mid-Holocene. Geology, 46(1), 47-50. https://doi.org/10.1130/G39633.1
+<br/>
+
+The World Bank. (2020). World Development Indicators. [data file]. Retrieved from 
+https://datacatalog.worldbank.org/dataset/world-development-indicators
+<br/>
+
+The World Health Organization. (2000). Internally displaced persons, health, and WHO. 
+<br/>
+
+Thomas, S. L. & Thomas, S. D. M. (2004). Displacement and health. British Medical 
+Bulletin, 69(1), 115-127. https://doi.org/10.1093/bmb/ldh009
+<br/>
+
